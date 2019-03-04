@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="FulkiWebForms.Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <%--<link href="Content/bootstrap.css" rel="stylesheet" />--%>
+    <link href="MyCSS.css" rel="stylesheet" />
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/toastr.js"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body runat="server" id="body">
+    <form id="form1" runat="server">
+        <div class="container mojKontenjer">
+            <div>
+                <span class="naslov"><%:Page.Title %> </span>
+
+                <div class="gumbiDesno">
+                    <asp:Button Text="DINAMICKI SE GEN" runat="server" CssClass="btn btn-success" ID="btnAdmin" CausesValidation="False" meta:resourcekey="btnAdminResource1" />
+                    <asp:LinkButton CssClass="btn btn-warning" runat="server" ID="btnLogout" CausesValidation="False" OnClick="btnLogout_Click">
+                        <%= Resources.Main.Master.btnLogoutResource1_Text %>
+                    </asp:LinkButton>
+                </div>
+            </div>
+
+            <hr style="margin-top: 3px" />
+
+            <%--Navigation--%>
+            <nav>
+                <ul>
+                    <li>
+                        <asp:LinkButton ID="btnAddNewPerson" runat="server" CausesValidation="False"
+                            CssClass="btn btn-default" OnClick="btnAddNewPerson_Click" meta:resourcekey="btnAddNewPersonResource1">
+                            <%-- Daj stari moj causes val stavi na sve na koje nezelis da validiciju prodjiudjasdaso9doasdbna0ow<nd --%>
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                            <%= Resources.Main.Master.lblAddNewPersonResource1_Text %>
+                        </asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton ID="btnEditData" runat="server" OnClick="btnEditData_Click" CausesValidation="False"
+                            CssClass="btn btn-default" meta:resourcekey="btnEditDataResource1">
+                            <span class="glyphicon glyphicon-share"></span>
+                            <%= Resources.Main.Master.lblEditDataResource1_Text %>
+                        </asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton ID="btnPersonList" runat="server" OnClick="btnPersonList_Click"
+                            CssClass="btn btn-default" CausesValidation="False" meta:resourcekey="btnPersonListResource1">
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                            <%= Resources.Main.Master.lblPersonListResource1_Text %>
+                        </asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton ID="btnSetup" runat="server" OnClick="btnSetup_Click"
+                            CssClass="btn btn-default" CausesValidation="False" meta:resourcekey="btnSetupResource1">
+                            <span class="glyphicon glyphicon-list"></span>
+                            <%= Resources.Main.Master.lblSetupResource1_Text %>
+                        </asp:LinkButton></li>
+                </ul>
+            </nav>
+            <hr />
+
+            <asp:ContentPlaceHolder ID="Content" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <hr />
+
+            <%--Footer--%>
+        </div>
+    </form>
+</body>
+</html>
