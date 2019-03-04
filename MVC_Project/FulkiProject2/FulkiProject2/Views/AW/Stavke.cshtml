@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FulkiProject2.Models.Stavka>
+
+@{
+    ViewBag.Title = "Stavke";
+}
+@section Scripts{
+    <script>
+        $("table.table").DataTable();
+    </script>
+}
+<h2>Stavke</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDStavka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kolicina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProizvodID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CijenaPoKomadu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PopustUPostocima)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UkupnaCijena)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDStavka)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kolicina)
+                </td>
+                <td>
+                    @Html.ActionLink(item.ProizvodID.ToString(), "Proizvod", new { id = item.ProizvodID, racunid=item.RacunID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CijenaPoKomadu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PopustUPostocima)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UkupnaCijena)
+                </td>
+            
+                
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+<div>
+    <p id="info" style="color:red;"></p>
+    @Html.ActionLink("Back to List", "GetRacuni")
+</div>

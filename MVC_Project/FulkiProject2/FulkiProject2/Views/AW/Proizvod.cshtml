@@ -1,0 +1,67 @@
+﻿@model FulkiProject2.Models.Proizvod
+
+@{
+    ViewBag.Title = "Proizvod";
+    var racunid=(int)ViewBag.IDRacun;
+}
+
+<h2>Proizvod</h2>
+
+<div>
+    <h4>Proizvod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDProizvod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDProizvod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojProizvoda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojProizvoda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Boja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Boja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Potkategorija)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Potkategorija)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorija)
+        </dd>
+
+    </dl>
+</div>
+<p>
+  
+    @Html.ActionLink("Back to List", "Stavke", new { id = racunid })
+</p>

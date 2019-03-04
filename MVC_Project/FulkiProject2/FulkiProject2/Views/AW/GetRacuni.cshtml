@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FulkiProject2.Models.Racun>
+@using FulkiProject2.Models;
+
+
+@{
+    ViewBag.Title = "Računi";
+    var kreditne = ViewBag.kartice as List<KreditnaKartica>;
+}
+@section Scripts{
+    <script>
+        $("table.table").DataTable();
+    </script>
+}
+<h2>GetRacuni</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumIzdavanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojRacuna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KupacID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KomercijalistID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KreditnaKarticaID)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatumIzdavanja)
+                </td>
+                <td>
+                    @Html.ActionLink(item.IDracun.ToString(), "Stavke", new { id = item.IDracun })
+                </td>
+                <td>
+                    @Html.ActionLink(item.KupacID.ToString(), "Details", new { id = item.KupacID })
+                </td>
+                <td>
+                    @Html.ActionLink(item.KomercijalistID.ToString(),"KomercijalistDetails", new { id = item.KomercijalistID, kupacid = item.KupacID })
+                </td>
+                <td>
+                    @Html.ActionLink(kreditne.Where(k=>k.IDKreditnaKartica==item.KreditnaKarticaID).First().Tip, "KarticaDetails", new { id = item.KreditnaKarticaID })
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+
+</table>

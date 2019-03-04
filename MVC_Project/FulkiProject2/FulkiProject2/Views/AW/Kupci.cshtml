@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Kupac>
+
+@{
+    ViewBag.Title = "Kupci";
+}
+@section Scripts{
+    <script>
+        $("table.table").DataTable();
+    </script>
+}
+<h2>Kupci</h2>
+
+<p>
+    @Html.ActionLink("Create New", "InsertKupac")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDKupac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDKupac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prezime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradID)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edit | ", "Edit", new { id = item.IDKupac }) 
+                        @Html.ActionLink("Delete |", "Delete", new { id = item.IDKupac }) 
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.IDKupac }) |
+                    @Html.ActionLink("Racuni", "RacuniKupca", new { id = item.IDKupac })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

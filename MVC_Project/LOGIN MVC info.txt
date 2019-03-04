@@ -1,0 +1,11 @@
+admin@email.hr
+
+Pass:
+Adm!n1
+
+USER ROLA:
+
+user@email.hr
+
+Pass:
+User!23

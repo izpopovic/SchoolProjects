@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FulkiProject2.Models.Racun>
+
+@{
+    ViewBag.Title = "RacuniKupca";
+}
+
+<h2>RacuniKupca</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDracun)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumIzdavanja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojRacuna)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KupacID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KomercijalistID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KreditnaKarticaID)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDracun)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumIzdavanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojRacuna)
+            </td>
+            <td>
+                @Html.ActionLink(item.KupacID.ToString(), "Details", new { id = item.KupacID })
+            </td>
+            <td>
+                @Html.ActionLink(item.KomercijalistID.ToString(), "KomercijalistDetails", new { id = item.KomercijalistID, kupacid = item.KupacID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KreditnaKarticaID)
+            </td>
+
+        </tr>
+    }
+
+
+</table>
+
+<div>
+    <p id="info" style="color:red;"></p>
+    @Html.ActionLink("Back to List", "Kupci")
+</div>

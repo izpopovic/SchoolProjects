@@ -1,0 +1,57 @@
+﻿@model FulkiProject2.Models.KreditnaKartica
+
+@{
+    ViewBag.Title = "KarticaDetails";
+}
+
+<h2>Detalji kreditne kartice</h2>
+
+<div>
+    <h4>Kreditna kartica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDKreditnaKartica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDKreditnaKartica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Broj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Broj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IstekMjesec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IstekMjesec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IstekGodina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IstekGodina)
+        </dd>
+
+    </dl>
+</div>
+<p> 
+    @Html.ActionLink("Back to List", "GetRacuni")
+</p>

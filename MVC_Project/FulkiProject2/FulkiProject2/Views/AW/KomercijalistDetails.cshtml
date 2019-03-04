@@ -1,0 +1,50 @@
+﻿@model FulkiProject2.Models.Komercijalist
+
+@{
+    ViewBag.Title = "KomercijalistDetails";
+    var kupacID = (int)ViewBag.IDKupac;
+}
+
+<h2>KomercijalistDetails</h2>
+
+<div>
+    <h4>Komercijalist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDKomercijalist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDKomercijalist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StalniZaposlenik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StalniZaposlenik)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "RacuniKupca",new { id = kupacID })
+</p>

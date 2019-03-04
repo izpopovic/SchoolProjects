@@ -1,0 +1,212 @@
+﻿@model Kupac
+
+@{
+    ViewBag.Title = "Edit";
+    var ddlOpcije = ViewBag.gradovi as List<Grad>;
+    var ddlDrzave = ViewBag.drzave as List<Drzava>;
+    //proslijedili smo listu gradova da je mozemo u ddl listu ispissati
+}
+
+<h2>Edit</h2>
+<hr />
+<div class="form-group">
+    <label>Odaberi kupca</label>
+    <select id="ddlKupci" class="form-control"></select>
+</div>
+<hr />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        //konfiguracija ajax poziva
+        //NAPUNI DDL
+        showDDLdata();
+        function showDDLdata() {
+            $("#ddlKupci").html("");
+            $.ajax({
+                url: '@Url.Action(controllerName:"AJAX",actionName:"GetKupci")',//sigurni smo ovako da je link uvijek ispravan, nes sa virtualni urlovima itd...
+                //treba podesiti sta ce se sa podacima desiti kada stignu sa posluzitelja, kada stignu nazad neka se izvrsi ova tu anonimna funkcija, prima podatke koji su dosli nazad
+                success: function (data) {
+                    //za svaki podataka neka se izvrsi ovaj event handler
+                    //za svakog kupca mi ih procesljavamo i vrtimo ovu each funkciju
+                    $(data).each(function (index, kupac) {
+                        var punoIme = `${kupac.Ime} ${kupac.Prezime}`;
+                        //console.log(punoIme);
+                        //novi option element koji mozemo ubaciti u ddl
+                        var option = new Option(punoIme, kupac.IDKupac, null, kupac.IDKupac == @Model.IDKupac )//dali je to ovaj kupac koji se trenutno uredjuje
+
+                        $("#ddlKupci").append(option);//punim ddl sa option elementom....
+                    })
+                }
+
+            })
+        }
+
+        //PRIKAZI PODATKE ODABRANOG KUPCA U DDL
+        //treba se pretplatit na change event
+        $("#ddlKupci").on('change', function () {
+            //console.log($(this).val());
+            var kupacId = ($(this).val());
+            //promjenom opcije u ddl na p info jednostavno obrisem tekst
+            $("p#info").html("");
+            //this je referenca na onog ko zove event
+
+
+            $.ajax({
+                url: '@Url.Action(controllerName:"AJAX", actionName:"GetKupac")',
+                //podaci koj se salju prema posluzitelju trebaju biti url enkodirani
+
+                data: { id: kupacId },
+                //ako sve dobro prodje definiramo sucess svojstvo kao event handler gdje cu implicitno primit kao podatke kupac cije podatke trazim
+                success: function (kupac) {
+                    //sad mormao pohvatati
+                    //svi elementi dobivaju automatski id Ime = ime prezime =prezime u pogledu edit
+                    $("#IDKupac").val(kupac.IDKupac);
+                    $("#Ime").val(kupac.Ime);
+                    $("#Prezime").val(kupac.Prezime);
+                    $("#Email").val(kupac.Email);
+                    $("#Telefon").val(kupac.Telefon);
+                    $("#GradID").val(kupac.GradID);
+                    $("#DrzavaID").val(kupac.DrzavaID);
+                }
+            })
+
+        })
+
+        //SAVE
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+            //sprijeci daljnje slanje ove forme
+            //napravi update iskljucivo ako je validacija ove forme ok
+            //this je referenca na samu formu
+            //klijentska validacija koja sprjecavanje daljnje spremanje ako nes nije ok
+            //ako je ok idemo na ajax kontroler nova metoda update kupac...
+            if ($(this).valid()) {
+                //console.log("Validacija OK");
+                var submitData = {
+                    IDKupac: $("#IDKupac").val(),
+                    Ime: $("#Ime").val(),
+                    Prezime: $("#Prezime").val(),
+                    Email: $("#Email").val(),
+                    Telefon: $("#Telefon").val(),
+                    GradID: $("#GradID").val(),
+                    DrzavaID: $("#DrzavaID").val()
+                }
+
+                $.ajax({
+                    url: '@Url.Action(controllerName:"AJAX",actionName:"UpdateKupac")',
+                    data: submitData,//ovo sad treba nes vratiti 0 ili 1 ovisno o tome jel proslo ili nije pa u controleru update kupac provjeriti to sa if else
+                    //klijentski dio validacije tj za odredjeni statuc code sta da se desi
+                    statusCode: {
+                        200: function () {
+                            $("p#info").html("Podaci uspješno ažurirani");
+                            showDDLdata();//reffilaj mi ponovno tu ddl sa azuriranim podatcima, jer kad izbrisemo ostane u ddl
+                        },
+                        304: function () {
+                            $("p#info").html("Podaci nisu uspješno ažurirani"); //ovaj p info dole na dnu odredjuje boju i to
+                        }
+                    }
+                })
+
+            }
+            else {
+                console.log("Validacija ERROR");
+            }
+
+        })
+
+
+
+    </script>
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Kupac</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.IDKupac)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GradID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList(name: "GradID", selectList: new SelectList
+            (
+            items: ddlOpcije,
+            dataTextField: "Naziv",
+            dataValueField: "IDGrad"), htmlAttributes: new { @class = "form-control" })
+
+                @*sta predstavlja tekst a stqa predtavlja value navedemo za ddl listu*@
+                @Html.ValidationMessageFor(model => model.GradID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DrzavaID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList(name: "DrzavaID", selectList: new SelectList
+            (
+            items: ddlDrzave,
+            dataTextField: "Naziv",
+            dataValueField: "IDDrzava"), htmlAttributes: new { @class = "form-control" })
+
+                @*sta predstavlja tekst a stqa predtavlja value navedemo za ddl listu*@
+                @Html.ValidationMessageFor(model => model.DrzavaID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p id="info" style="color:red;"></p>
+        @Html.ActionLink("Back to List", "Kupci")
+    </div>
+
+}
+
+
