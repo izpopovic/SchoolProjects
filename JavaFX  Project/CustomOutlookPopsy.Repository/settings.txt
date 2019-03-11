@@ -1,0 +1,3 @@
+rmiPort=1098
+rmiKey=server
+socketsPort=7421

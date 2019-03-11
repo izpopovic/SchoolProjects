@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="506.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customoutlookpopsy.SecondMailClientController">
+      <TabPane fx:id="tbPaneRecieveMail" prefHeight="453.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabInboxSender2" text="Inbox">
+               <content>
+                  <TableView fx:id="tblViewEmails2" prefHeight="452.0" prefWidth="700.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumnFrom2" prefWidth="250.0" text="From:" />
+                        <TableColumn fx:id="tableColumnSubject2" minWidth="0.0" prefWidth="300.0" text="Subject:" />
+                        <TableColumn fx:id="tableColumnDateOfReceivedEmail2" minWidth="0.0" prefWidth="150.0" text="Date:" />
+                     </columns>
+                  </TableView>
+               </content></Tab>
+          <Tab fx:id="tabOutboxSender2" text="Outbox">
+            <content>
+               <TableView fx:id="tblViewEmails21" prefHeight="452.0" prefWidth="700.0">
+                  <columns>
+                     <TableColumn fx:id="tableColumnFrom21" prefWidth="188.79995155334473" text="To:" />
+                     <TableColumn fx:id="tableColumnSubject21" minWidth="0.0" prefWidth="363.2000427246094" text="Subject:" />
+                     <TableColumn fx:id="tableColumnDateOfReceivedEmail21" minWidth="0.0" prefWidth="149.60003662109375" text="Date:" />
+                  </columns>
+               </TableView>
+            </content></Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="button2Refresh" layoutX="588.0" layoutY="461.0" mnemonicParsing="false" onAction="#onBtnClickRefresh2" prefHeight="28.0" prefWidth="105.0" text="Refresh" />
+      <Button fx:id="button2NewMail" layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#onBtnClickNewMail2" prefHeight="28.0" prefWidth="105.0" text="New mail" />
+   <TextArea fx:id="txtAreaChat" editable="false" layoutX="709.0" layoutY="69.0" prefHeight="384.0" prefWidth="235.0" wrapText="true" />
+   <Label layoutX="709.0" layoutY="41.0" text="Chat" textFill="#e80c0c" />
+   <TextField fx:id="txtChatMessage" layoutX="709.0" layoutY="461.0" />
+   <Button fx:id="btnSendChatMessage" layoutX="904.0" layoutY="461.0" mnemonicParsing="false" onAction="#onBtnSendChatMessage" prefHeight="31.0" prefWidth="40.0" text="&gt;" />
+   <ComboBox fx:id="cbRepoSwitch" layoutX="275.0" layoutY="464.0" onAction="#onCbRepoSwitch" prefWidth="150.0" promptText="Choose repository..." />
+</AnchorPane>

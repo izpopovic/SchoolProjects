@@ -1,0 +1,3 @@
+Patient -> List<Appointment> (repo.getAppointments(Patient.getID()))
+Doctor -> List<Patient> (proc po repo.getPatients() i onda za svakog pacijenta, 
+ako neki od njegovih appointmenta ima ID == Doctor.getID(), taj pacijent pripada tom doktoru)

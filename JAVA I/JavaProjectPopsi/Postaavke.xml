@@ -1,0 +1,15 @@
+<Data>
+	<Settings>
+		<!-- Console || GUI -->
+		<AppType>GUI</AppType>
+	</Settings>
+	<ConnectionString>
+		<ServerName>localhost</ServerName>
+		<InstanceName>SQLEXPRESS</InstanceName>
+		<DatabaseName>JavaProjectPopsy</DatabaseName>
+		<Username>Ivan</Username>
+		<Password/>
+		<Port>1433</Port>
+		<IntegratedSecurity>true</IntegratedSecurity>
+	</ConnectionString>
+</Data>
